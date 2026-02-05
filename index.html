@@ -1,1 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Surprise ❤️</title>
 
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align:center;
+  overflow:hidden;
+  background:linear-gradient(45deg,#ff4e88,#ff8fab,#ffc2d1);
+  color:white;
+}
+.card{ margin-top:15vh; padding:20px; }
+
+button{
+  padding:15px 25px;
+  font-size:20px;
+  border:none;
+  border-radius:10px;
+  margin:10px;
+  cursor:pointer;
+  transition: 0.3s;
+}
+#yes{background:#00ff9d; font-weight: bold;}
+#no{background:#ff3c3c;color:white;}
+
+.floatPhoto{
+  position:fixed;
+  width:90px;
+  border-radius:12px;
+  top:-100px;
+  animation:fallPhoto 8s linear forwards;
+  z-index: -1;
+}
+@keyframes fallPhoto{
+  to{ transform:translateY(120vh) rotate(360deg); }
+}
+
+.confetti{
+  position:fixed;
+  top:-20px;
+  font-size:22px;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall{
+  to{ transform:translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+#poemBox{
+  max-width:320px;
+  margin:20px auto;
+  font-size:22px;
+  line-height:1.8;
+  min-height:120px;
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+#loveGifBox img{
+  width:160px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+.gifts{
+  position:fixed;
+  bottom:30px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+.gift{
+  font-size:40px;
+  cursor:pointer;
+  background:white;
+  color:black;
+  border-radius:15px;
+  padding:10px;
+  width:100px;
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.gift p{ font-size:11px; font-weight: bold; margin: 0; text-align: center; }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Will You Be My Valentine? ❤️</h1>
+  <button id="yes">YES</button>
+  <button id="no">NO</button>
+  <div id="message"></div>
+  <div id="loveGifBox"></div>
+  <div id="poemBox"></div>
+</div>
+
+<div id="gallery"></div>
+
+<script>
+const yesBtn=document.getElementById("yes");
+const noBtn=document.getElementById("no");
+const msg=document.getElementById("message");
+const poemBox=document.getElementById("poemBox");
+const loveGifBox=document.getElementById("loveGifBox");
+const gallery=document.getElementById("gallery");
+
+let accepted=false;
+
+/* NO BUTTON */
+const noMessages=[
+"No","Are you sure mere Chand? 🥺","Really sure baby?",
+"mera dil mat todo 💔","Pleease maan jao","Ab toh YES bol do 🥰"
+];
+let noIndex=0;
+
+function moveNo(){
+ if(accepted) return;
+ noBtn.style.position="absolute";
+ noBtn.style.left=Math.random()*80+"vw";
+ noBtn.style.top=Math.random()*80+"vh";
+ noIndex=(noIndex+1)%noMessages.length;
+ noBtn.innerText=noMessages[noIndex];
+}
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+
+/* PHOTOS UPDATED P1 → P14 */
+const photos=[
+"p1.jpeg","p2.jpeg","p3.jpeg","p4.jpeg","p5.jpeg","p6.jpeg","p7.jpeg",
+"p8.jpeg","p9.jpeg","p10.jpeg","p11.jpeg","p12.jpeg","p13.jpeg","p14.jpeg"
+];
+
+setInterval(()=>{
+ const img=document.createElement("img");
+ img.src=photos[Math.floor(Math.random()*photos.length)];
+ img.className="floatPhoto";
+ img.style.left=Math.random()*100+"vw";
+ gallery.appendChild(img);
+ setTimeout(()=>img.remove(),8000);
+},2500);
+
+/* POEM */
+const poem=`Tum mere chand the,
+tum mere chand ho,
+aur tum mere chand hi rahoge. 🌙`;
+
+function typeWriter(){
+ let i=0;
+ function typing(){
+   if(i<poem.length){
+     poemBox.innerHTML+=poem.charAt(i);
+     i++;
+     setTimeout(typing,100);
+   }
+ }
+ typing();
+}
+
+/* YES CLICK */
+yesBtn.onclick=()=>{
+ accepted=true;
+ noBtn.style.display="none";
+
+ new Audio("Do You Know.mp3").play();
+
+ for(let i=0;i<80;i++){
+  const conf=document.createElement("div");
+  conf.innerHTML="💖";
+  conf.className="confetti";
+  conf.style.left=Math.random()*100+"vw";
+  conf.style.animationDelay=Math.random()*2+"s";
+  document.body.appendChild(conf);
+ }
+
+ loveGifBox.innerHTML =
+ '<img src="Kisses Love GIF.gif">';
+
+ msg.innerHTML="<h1>I KNEW YOU LOVE ME ❤️</h1>";
+ typeWriter();
+ setTimeout(showGifts,5000);
+};
+
+/* GIFTS */
+function showGifts(){
+ const giftBox=document.createElement("div");
+ giftBox.className="gifts";
+ giftBox.innerHTML=`
+  <div class="gift" onclick="openGift(this,'Meri har khushi, sirf tumse. ❤️')">🎁</div>
+  <div class="gift" onclick="openGift(this,'Tum ho, toh sab kuch hai. 💕')">🎁</div>
+  <div class="gift" onclick="openGift(this,'Hamesha mere rehna. 😘')">🎁</div>
+ `;
+ document.body.appendChild(giftBox);
+}
+function openGift(el,text){ 
+  el.style.background = "#fff0f3";
+  el.innerHTML="<p>"+text+"</p>"; 
+}
+</script>
+
+</body>
+</html>
