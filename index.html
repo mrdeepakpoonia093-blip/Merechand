@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family:'Segoe UI',Arial,sans-serif;
   text-align:center;
   overflow:hidden;
   background:linear-gradient(45deg,#ff4e88,#ff8fab,#ffc2d1);
@@ -23,9 +23,9 @@ button{
   border-radius:10px;
   margin:10px;
   cursor:pointer;
-  transition: 0.3s;
+  transition:.3s;
 }
-#yes{background:#00ff9d; font-weight: bold;}
+#yes{background:#00ff9d;font-weight:bold;}
 #no{background:#ff3c3c;color:white;}
 
 .floatPhoto{
@@ -34,7 +34,7 @@ button{
   border-radius:12px;
   top:-100px;
   animation:fallPhoto 8s linear forwards;
-  z-index: -1;
+  z-index:-1;
 }
 @keyframes fallPhoto{
   to{ transform:translateY(120vh) rotate(360deg); }
@@ -56,8 +56,8 @@ button{
   font-size:22px;
   line-height:1.8;
   min-height:120px;
-  font-weight: bold;
-  white-space: pre-line;
+  font-weight:bold;
+  white-space:pre-line;
 }
 
 #loveGifBox img{
@@ -86,9 +86,9 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
-.gift p{ font-size:11px; font-weight: bold; margin: 0; text-align: center; }
+.gift p{ font-size:11px;font-weight:bold;margin:0;text-align:center; }
 </style>
 </head>
 
@@ -133,10 +133,10 @@ function moveNo(){
 noBtn.addEventListener("mouseover",moveNo);
 noBtn.addEventListener("touchstart",moveNo);
 
-/* PHOTOS UPDATED P1 → P14 */
+/* PHOTOS P1 → P14 */
 const photos=[
-"p1.jpeg","p2.jpeg","p3.jpeg","p4.jpeg","p5.jpeg","p6.jpeg","p7.jpeg",
-"p8.jpeg","p9.jpeg","p10.jpeg","p11.jpeg","p12.jpeg","p13.jpeg","p14.jpeg"
+"P1.jpeg","P2.jpeg","P3.jpeg","P4.jpeg","P5.jpeg","P6.jpeg","P7.jpeg",
+"P8.jpeg","P9.jpeg","P10.jpeg","P11.jpeg","P12.jpeg","P13.jpeg","P14.jpeg"
 ];
 
 setInterval(()=>{
@@ -181,9 +181,7 @@ yesBtn.onclick=()=>{
   document.body.appendChild(conf);
  }
 
- loveGifBox.innerHTML =
- '<img src="Kisses Love GIF.gif">';
-
+ loveGifBox.innerHTML='<img src="Kisses Love GIF.gif">';
  msg.innerHTML="<h1>I KNEW YOU LOVE ME ❤️</h1>";
  typeWriter();
  setTimeout(showGifts,5000);
@@ -201,7 +199,7 @@ function showGifts(){
  document.body.appendChild(giftBox);
 }
 function openGift(el,text){ 
-  el.style.background = "#fff0f3";
+  el.style.background="#fff0f3";
   el.innerHTML="<p>"+text+"</p>"; 
 }
 </script>
