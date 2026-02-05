@@ -15,7 +15,6 @@ body{
   color:white;
 }
 
-/* NEW TOP BANNER */
 .topBanner{
   position:fixed;
   top:0;
@@ -25,7 +24,6 @@ body{
   padding:10px;
   font-size:22px;
   font-weight:bold;
-  letter-spacing:1px;
 }
 
 .card{ margin-top:20vh; padding:20px; }
@@ -37,7 +35,6 @@ button{
   border-radius:10px;
   margin:10px;
   cursor:pointer;
-  transition:.3s;
 }
 #yes{background:#00ff9d;font-weight:bold;}
 #no{background:#ff3c3c;color:white;}
@@ -69,7 +66,6 @@ button{
   margin:20px auto;
   font-size:22px;
   line-height:1.8;
-  min-height:120px;
   font-weight:bold;
   white-space:pre-line;
 }
@@ -78,6 +74,19 @@ button{
   width:160px;
   border-radius:20px;
   box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* LETTER BUTTON */
+.letterBtn{
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 22px;
+  background:white;
+  color:#ff4e88;
+  font-weight:bold;
+  border-radius:12px;
+  text-decoration:none;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
 .gifts{
@@ -90,7 +99,6 @@ button{
 }
 .gift{
   font-size:40px;
-  cursor:pointer;
   background:white;
   color:black;
   border-radius:15px;
@@ -100,9 +108,9 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  cursor:pointer;
 }
-.gift p{ font-size:11px;font-weight:bold;margin:0;text-align:center; }
+.gift p{ font-size:11px;font-weight:bold;margin:0; }
 </style>
 </head>
 
@@ -114,9 +122,11 @@ button{
   <h1>Will You Be My Valentine? ❤️</h1>
   <button id="yes">YES</button>
   <button id="no">NO</button>
+
   <div id="message"></div>
   <div id="loveGifBox"></div>
   <div id="poemBox"></div>
+  <div id="letterBox"></div>
 </div>
 
 <div id="gallery"></div>
@@ -124,16 +134,16 @@ button{
 <script>
 const yesBtn=document.getElementById("yes");
 const noBtn=document.getElementById("no");
-const msg=document.getElementById("message");
 const poemBox=document.getElementById("poemBox");
 const loveGifBox=document.getElementById("loveGifBox");
+const letterBox=document.getElementById("letterBox");
 const gallery=document.getElementById("gallery");
 
 let accepted=false;
 
 const noMessages=[
 "No","Are you sure mere Chand? 🥺","Really sure baby?",
-"mera dil mat todo 💔","Pleease maan jao","Ab toh YES bol do 🥰"
+"mera dil mat todo 💔","Please maan jao","Ab toh YES bol do 🥰"
 ];
 let noIndex=0;
 
@@ -146,7 +156,6 @@ function moveNo(){
  noBtn.innerText=noMessages[noIndex];
 }
 noBtn.addEventListener("mouseover",moveNo);
-noBtn.addEventListener("touchstart",moveNo);
 
 const photos=[
 "P1.jpeg","P2.jpeg","P3.jpeg","P4.jpeg","P5.jpeg","P6.jpeg","P7.jpeg",
@@ -185,34 +194,23 @@ yesBtn.onclick=()=>{
  new Audio("Do You Know.mp3").play();
 
  for(let i=0;i<80;i++){
-  const conf=document.createElement("div");
-  conf.innerHTML="💖";
-  conf.className="confetti";
-  conf.style.left=Math.random()*100+"vw";
-  conf.style.animationDelay=Math.random()*2+"s";
-  document.body.appendChild(conf);
+  const c=document.createElement("div");
+  c.innerHTML="💖";
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  document.body.appendChild(c);
  }
 
  loveGifBox.innerHTML='<img src="Kisses Love GIF.gif">';
- msg.innerHTML="<h1>I KNEW YOU LOVE ME ❤️</h1>";
  typeWriter();
- setTimeout(showGifts,5000);
-};
 
-function showGifts(){
- const giftBox=document.createElement("div");
- giftBox.className="gifts";
- giftBox.innerHTML=`
-  <div class="gift" onclick="openGift(this,'Meri har khushi, sirf tumse. ❤️')">🎁</div>
-  <div class="gift" onclick="openGift(this,'Tum ho, toh sab kuch hai. 💕')">🎁</div>
-  <div class="gift" onclick="openGift(this,'Hamesha mere rehna. 😘')">🎁</div>
+ /* LETTER BUTTON SHOWN ONLY AFTER YES */
+ letterBox.innerHTML = `
+   <a href="letter.docx" class="letterBtn" target="_blank">
+     Read My Letter 💌
+   </a>
  `;
- document.body.appendChild(giftBox);
-}
-function openGift(el,text){ 
-  el.style.background="#fff0f3";
-  el.innerHTML="<p>"+text+"</p>"; 
-}
+};
 </script>
 
 </body>
