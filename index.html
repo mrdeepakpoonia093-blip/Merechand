@@ -89,6 +89,7 @@ button{
   box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* GIFTS */
 .gifts{
   position:fixed;
   bottom:30px;
@@ -109,8 +110,9 @@ button{
   align-items:center;
   justify-content:center;
   cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
-.gift p{ font-size:11px;font-weight:bold;margin:0; }
+.gift p{ font-size:11px;font-weight:bold;margin:0;text-align:center; }
 </style>
 </head>
 
@@ -171,9 +173,9 @@ setInterval(()=>{
  setTimeout(()=>img.remove(),8000);
 },2500);
 
-const poem=`Monika mean Moonie,
-Moonie mean Moon,
-Moon mean mere Chand. 🌙`;
+const poem=`Tum mere chand the,
+tum mere chand ho,
+aur tum mere chand hi rahoge. 🌙`;
 
 function typeWriter(){
  let i=0;
@@ -185,6 +187,22 @@ function typeWriter(){
    }
  }
  typing();
+}
+
+/* SHOW GIFTS */
+function showGifts(){
+ const giftBox=document.createElement("div");
+ giftBox.className="gifts";
+ giftBox.innerHTML=`
+  <div class="gift" onclick="openGift(this,'Meri har khushi, sirf tumse ❤️')">🎁</div>
+  <div class="gift" onclick="openGift(this,'Tum ho toh sab kuch hai 💕')">🎁</div>
+  <div class="gift" onclick="openGift(this,'Hamesha mere rehna 😘')">🎁</div>
+ `;
+ document.body.appendChild(giftBox);
+}
+function openGift(el,text){
+ el.style.background="#fff0f3";
+ el.innerHTML="<p>"+text+"</p>";
 }
 
 yesBtn.onclick=()=>{
@@ -203,13 +221,9 @@ yesBtn.onclick=()=>{
 
  loveGifBox.innerHTML='<img src="Kisses Love GIF.gif">';
  typeWriter();
+ showGifts();
 
- /* LETTER BUTTON SHOWN ONLY AFTER YES */
- letterBox.innerHTML = `
-   <a href="letter.docx" class="letterBtn" target="_blank">
-     Read My Letter 💌
-   </a>
- `;
+ letterBox.innerHTML=`<a href="letter.docx" class="letterBtn" target="_blank">Read My Letter 💌</a>`;
 };
 </script>
 
